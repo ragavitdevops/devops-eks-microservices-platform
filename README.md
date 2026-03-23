@@ -119,24 +119,30 @@ devops-eks-platform/
 ```bash
 git clone https://github.com/ragavitdevops/devops-eks-microservices-platform.git
 cd devops-eks-platform
-Deploy infrastructure with Terraform
+
+**Deploy infrastructure with Terraform **
 cd terraform
 terraform init
 terraform apply
-Build and push Docker images
+
+**Build and push Docker images**
 docker build -t backend ./microservices/backend
 docker tag backend:latest <ECR_URL>/backend:latest
 docker push <ECR_URL>/backend:latest
-Deploy Helm charts to EKS
+
+**Deploy Helm charts to EKS**
 helm upgrade --install backend helm-charts/backend
-Access backend service
+
+**Access backend service**
 kubectl get svc backend
 # Use EXTERNAL-IP in browser or curl
-Check monitoring stack
+
+**Check monitoring stack**
 kubectl get pods -n monitoring
 kubectl port-forward -n monitoring svc/grafana 3000:3000
 # Access Grafana at http://localhost:3000
 Security Scans
+
 # Scan Docker image
 trivy image <ECR_URL>/backend:latest
 
