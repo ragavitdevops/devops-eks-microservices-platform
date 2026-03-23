@@ -89,6 +89,9 @@ devops-eks-platform/
 
 - Trivy scans for **Docker images and Terraform code**
 - Detects **vulnerabilities and misconfigurations**
+<img width="908" height="499" alt="Trivy_scan" src="https://github.com/user-attachments/assets/76398d5f-71d5-4275-b573-0aaf778f39f7" />
+
+<img width="521" height="68" alt="app_test" src="https://github.com/user-attachments/assets/89ae371d-463a-4df5-9583-ddf2c8099779" />
 
 ### 5. Monitoring & Logging
 
