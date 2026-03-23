@@ -1,0 +1,560 @@
+{
+  "SchemaVersion": 2,
+  "Trivy": {
+    "Version": "0.69.3"
+  },
+  "ReportID": "019d1a86-5e43-76de-923a-cce288af4bdf",
+  "CreatedAt": "2026-03-23T11:48:26.819452368Z",
+  "ArtifactName": ".",
+  "ArtifactType": "filesystem",
+  "Results": [
+    {
+      "Target": "eks",
+      "Class": "config",
+      "Type": "terraform",
+      "MisconfSummary": {
+        "Successes": 74,
+        "Failures": 0
+      }
+    },
+    {
+      "Target": "terraform-aws-modules/eks/aws/eks/.terraform/modules/eks/main.tf",
+      "Class": "config",
+      "Type": "terraform",
+      "MisconfSummary": {
+        "Successes": 0,
+        "Failures": 2
+      },
+      "Misconfigurations": [
+        {
+          "Type": "Terraform Security Check",
+          "ID": "AWS-0038",
+          "Title": "EKS Clusters should have cluster control plane logging turned on",
+          "Description": "By default cluster control plane logging is not turned on. Logging is available for audit, api, authenticator, controllerManager and scheduler. All logging should be turned on for cluster control plane.\n",
+          "Message": "Control plane controller manager logging is not enabled.",
+          "Namespace": "builtin.aws.eks.aws0038",
+          "Query": "data.builtin.aws.eks.aws0038.deny",
+          "Resolution": "Enable logging for the EKS control plane",
+          "Severity": "MEDIUM",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/aws-0038",
+          "References": [
+            "https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html",
+            "https://avd.aquasec.com/misconfig/aws-0038"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "module.eks",
+            "Provider": "AWS",
+            "Service": "eks",
+            "StartLine": 25,
+            "EndLine": 91,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 25,
+                  "Content": "resource \"aws_eks_cluster\" \"this\" {",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[38;5;33mresource\u001b[0m \u001b[38;5;37m\"aws_eks_cluster\"\u001b[0m \u001b[38;5;37m\"this\"\u001b[0m {",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 26,
+                  "Content": "  count = local.create ? 1 : 0",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245mcount\u001b[0m = local.create \u001b[38;5;245m?\u001b[0m \u001b[38;5;37m1\u001b[0m \u001b[38;5;245m:\u001b[0m \u001b[38;5;37m0",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 27,
+                  "Content": "",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 28,
+                  "Content": "  name                      = var.cluster_name",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245mname\u001b[0m                      = \u001b[38;5;33mvar\u001b[0m.cluster_name",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 29,
+                  "Content": "  role_arn                  = local.cluster_role",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245mrole_arn\u001b[0m                  = local.cluster_role",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 30,
+                  "Content": "  version                   = var.cluster_version",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245mversion\u001b[0m                   = \u001b[38;5;33mvar\u001b[0m.cluster_version",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 31,
+                  "Content": "  enabled_cluster_log_types = var.cluster_enabled_log_types",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245menabled_cluster_log_types\u001b[0m = \u001b[38;5;33mvar\u001b[0m.cluster_enabled_log_types",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 32,
+                  "Content": "",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 33,
+                  "Content": "  vpc_config {",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  vpc_config {",
+                  "FirstCause": false,
+                  "LastCause": true
+                },
+                {
+                  "Number": 34,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            },
+            "Occurrences": [
+              {
+                "Resource": "module.eks",
+                "Filename": "eks/main.tf",
+                "Location": {
+                  "StartLine": 38,
+                  "EndLine": 62
+                }
+              }
+            ]
+          }
+        },
+        {
+          "Type": "Terraform Security Check",
+          "ID": "AWS-0038",
+          "Title": "EKS Clusters should have cluster control plane logging turned on",
+          "Description": "By default cluster control plane logging is not turned on. Logging is available for audit, api, authenticator, controllerManager and scheduler. All logging should be turned on for cluster control plane.\n",
+          "Message": "Control plane scheduler logging is not enabled.",
+          "Namespace": "builtin.aws.eks.aws0038",
+          "Query": "data.builtin.aws.eks.aws0038.deny",
+          "Resolution": "Enable logging for the EKS control plane",
+          "Severity": "MEDIUM",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/aws-0038",
+          "References": [
+            "https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html",
+            "https://avd.aquasec.com/misconfig/aws-0038"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "module.eks",
+            "Provider": "AWS",
+            "Service": "eks",
+            "StartLine": 25,
+            "EndLine": 91,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 25,
+                  "Content": "resource \"aws_eks_cluster\" \"this\" {",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[38;5;33mresource\u001b[0m \u001b[38;5;37m\"aws_eks_cluster\"\u001b[0m \u001b[38;5;37m\"this\"\u001b[0m {",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 26,
+                  "Content": "  count = local.create ? 1 : 0",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245mcount\u001b[0m = local.create \u001b[38;5;245m?\u001b[0m \u001b[38;5;37m1\u001b[0m \u001b[38;5;245m:\u001b[0m \u001b[38;5;37m0",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 27,
+                  "Content": "",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 28,
+                  "Content": "  name                      = var.cluster_name",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245mname\u001b[0m                      = \u001b[38;5;33mvar\u001b[0m.cluster_name",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 29,
+                  "Content": "  role_arn                  = local.cluster_role",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245mrole_arn\u001b[0m                  = local.cluster_role",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 30,
+                  "Content": "  version                   = var.cluster_version",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245mversion\u001b[0m                   = \u001b[38;5;33mvar\u001b[0m.cluster_version",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 31,
+                  "Content": "  enabled_cluster_log_types = var.cluster_enabled_log_types",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245menabled_cluster_log_types\u001b[0m = \u001b[38;5;33mvar\u001b[0m.cluster_enabled_log_types",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 32,
+                  "Content": "",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 33,
+                  "Content": "  vpc_config {",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  vpc_config {",
+                  "FirstCause": false,
+                  "LastCause": true
+                },
+                {
+                  "Number": 34,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            },
+            "Occurrences": [
+              {
+                "Resource": "module.eks",
+                "Filename": "eks/main.tf",
+                "Location": {
+                  "StartLine": 38,
+                  "EndLine": 62
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "Target": "terraform-aws-modules/eks/aws/eks/.terraform/modules/eks/node_groups.tf",
+      "Class": "config",
+      "Type": "terraform",
+      "MisconfSummary": {
+        "Successes": 0,
+        "Failures": 1
+      },
+      "Misconfigurations": [
+        {
+          "Type": "Terraform Security Check",
+          "ID": "AWS-0104",
+          "Title": "A security group rule should not allow unrestricted egress to any IP address.",
+          "Description": "Opening up ports to connect out to the public internet is generally to be avoided. You should restrict access to IP addresses or ranges that are explicitly required where possible.\n",
+          "Message": "Security group rule allows unrestricted egress to any IP address.",
+          "Namespace": "builtin.aws.ec2.aws0104",
+          "Query": "data.builtin.aws.ec2.aws0104.deny",
+          "Resolution": "Set a more restrictive cidr range",
+          "Severity": "CRITICAL",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/aws-0104",
+          "References": [
+            "https://docs.aws.amazon.com/whitepapers/latest/building-scalable-secure-multi-vpc-network-infrastructure/centralized-egress-to-internet.html",
+            "https://avd.aquasec.com/misconfig/aws-0104"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "module.eks",
+            "Provider": "AWS",
+            "Service": "ec2",
+            "StartLine": 223,
+            "EndLine": 223,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 207,
+                  "Content": "resource \"aws_security_group_rule\" \"node\" {",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[38;5;33mresource\u001b[0m \u001b[38;5;37m\"aws_security_group_rule\"\u001b[0m \u001b[38;5;37m\"node\"\u001b[0m {",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 208,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 223,
+                  "Content": "  cidr_blocks              = lookup(each.value, \"cidr_blocks\", null)",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245mcidr_blocks\u001b[0m              =\u001b[38;5;33m lookup\u001b[0m(\u001b[38;5;33meach\u001b[0m.value, \u001b[38;5;37m\"cidr_blocks\"\u001b[0m, null)",
+                  "FirstCause": true,
+                  "LastCause": true
+                },
+                {
+                  "Number": 227,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 228,
+                  "Content": "}",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "}",
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            },
+            "Occurrences": [
+              {
+                "Resource": "aws_security_group_rule.node[\"egress_all\"]",
+                "Filename": "terraform-aws-modules/eks/aws/eks/.terraform/modules/eks/node_groups.tf",
+                "Location": {
+                  "StartLine": 207,
+                  "EndLine": 228
+                }
+              },
+              {
+                "Resource": "module.eks",
+                "Filename": "eks/main.tf",
+                "Location": {
+                  "StartLine": 38,
+                  "EndLine": 62
+                }
+              }
+            ],
+            "RenderedCause": {
+              "Raw": "resource \"aws_security_group_rule\" \"node\" {\n  cidr_blocks = [\"0.0.0.0/0\"]\n}",
+              "Highlighted": "\u001b[38;5;33mresource\u001b[0m \u001b[38;5;37m\"aws_security_group_rule\"\u001b[0m \u001b[38;5;37m\"node\"\u001b[0m {\n  \u001b[38;5;245mcidr_blocks\u001b[0m = [\u001b[38;5;37m\"0.0.0.0/0\"\u001b[0m]\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Target": "terraform-aws-modules/vpc/aws/eks/.terraform/modules/vpc/main.tf",
+      "Class": "config",
+      "Type": "terraform",
+      "MisconfSummary": {
+        "Successes": 0,
+        "Failures": 1
+      },
+      "Misconfigurations": [
+        {
+          "Type": "Terraform Security Check",
+          "ID": "AWS-0178",
+          "Title": "VPC Flow Logs is a feature that enables you to capture information about the IP traffic going to and from network interfaces in your VPC. After you've created a flow log, you can view and retrieve its data in Amazon CloudWatch Logs. It is recommended that VPC Flow Logs be enabled for packet \"Rejects\" for VPCs.",
+          "Description": "VPC Flow Logs provide visibility into network traffic that traverses the VPC and can be used to detect anomalous traffic or insight during security workflows.\n",
+          "Message": "VPC does not have VPC Flow Logs enabled.",
+          "Namespace": "builtin.aws.ec2.aws0178",
+          "Query": "data.builtin.aws.ec2.aws0178.deny",
+          "Resolution": "Enable flow logs for VPC",
+          "Severity": "MEDIUM",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/aws-0178",
+          "References": [
+            "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/RootDeviceStorage.html",
+            "https://avd.aquasec.com/misconfig/aws-0178"
+          ],
+          "Status": "FAIL",
+          "CauseMetadata": {
+            "Resource": "module.vpc",
+            "Provider": "AWS",
+            "Service": "ec2",
+            "StartLine": 29,
+            "EndLine": 52,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 29,
+                  "Content": "resource \"aws_vpc\" \"this\" {",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[38;5;33mresource\u001b[0m \u001b[38;5;37m\"aws_vpc\"\u001b[0m \u001b[38;5;37m\"this\"\u001b[0m {",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 30,
+                  "Content": "  count = local.create_vpc ? 1 : 0",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245mcount\u001b[0m = local.create_vpc \u001b[38;5;245m?\u001b[0m \u001b[38;5;37m1\u001b[0m \u001b[38;5;245m:\u001b[0m \u001b[38;5;37m0",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 31,
+                  "Content": "",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 32,
+                  "Content": "  cidr_block          = var.use_ipam_pool ? null : var.cidr",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245mcidr_block\u001b[0m          = \u001b[38;5;33mvar\u001b[0m.use_ipam_pool \u001b[38;5;245m?\u001b[0m null \u001b[38;5;245m:\u001b[0m \u001b[38;5;33mvar\u001b[0m.cidr",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 33,
+                  "Content": "  ipv4_ipam_pool_id   = var.ipv4_ipam_pool_id",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245mipv4_ipam_pool_id\u001b[0m   = \u001b[38;5;33mvar\u001b[0m.ipv4_ipam_pool_id",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 34,
+                  "Content": "  ipv4_netmask_length = var.ipv4_netmask_length",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245mipv4_netmask_length\u001b[0m = \u001b[38;5;33mvar\u001b[0m.ipv4_netmask_length",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 35,
+                  "Content": "",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 36,
+                  "Content": "  assign_generated_ipv6_cidr_block     = var.enable_ipv6 \u0026\u0026 !var.use_ipam_pool ? true : null",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245massign_generated_ipv6_cidr_block\u001b[0m     = \u001b[38;5;33mvar\u001b[0m.enable_ipv6 \u001b[38;5;245m\u0026\u0026\u001b[0m \u001b[38;5;245m!\u001b[0m\u001b[38;5;33mvar\u001b[0m.use_ipam_pool \u001b[38;5;245m?\u001b[0m \u001b[38;5;166mtrue\u001b[0m \u001b[38;5;245m:\u001b[0m null",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 37,
+                  "Content": "  ipv6_cidr_block                      = var.ipv6_cidr",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "  \u001b[38;5;245mipv6_cidr_block\u001b[0m                      = \u001b[38;5;33mvar\u001b[0m.ipv6_cidr",
+                  "FirstCause": false,
+                  "LastCause": true
+                },
+                {
+                  "Number": 38,
+                  "Content": "",
+                  "IsCause": false,
+                  "Annotation": "",
+                  "Truncated": true,
+                  "FirstCause": false,
+                  "LastCause": false
+                }
+              ]
+            },
+            "Occurrences": [
+              {
+                "Resource": "module.vpc",
+                "Filename": "eks/main.tf",
+                "Location": {
+                  "StartLine": 16,
+                  "EndLine": 36
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
